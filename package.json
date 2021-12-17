@@ -8,19 +8,38 @@
     "gatsby"
   ],
   "scripts": {
-    "develop": "gatsby develop",
+    "develop": "gatsby develop -H 0.0.0.0",
     "start": "gatsby develop",
     "build": "gatsby build",
-    "serve": "gatsby serve",
+    "serve": "gatsby serve -H 0.0.0.0",
     "clean": "gatsby clean"
   },
   "dependencies": {
+    "axios": "^0.24.0",
+    "chart.js": "^3.6.2",
+    "classnames": "^2.3.1",
+    "formik": "^2.2.9",
     "gatsby": "^4.2.0",
     "gatsby-plugin-manifest": "^4.3.0",
+    "gatsby-plugin-nprogress": "^4.3.0",
     "gatsby-plugin-react-helmet": "^5.3.0",
+    "gatsby-plugin-react-svg": "^3.1.0",
     "gatsby-plugin-sitemap": "^5.3.0",
+    "gatsby-plugin-webfonts": "^2.2.1",
+    "rc-progress": "^3.1.4",
     "react": "^17.0.1",
+    "react-chartjs-2": "^4.0.0",
     "react-dom": "^17.0.1",
-    "react-helmet": "^6.1.0"
+    "react-helmet": "^6.1.0",
+    "react-icons": "^4.3.1",
+    "react-use-audio-player": "^1.2.4",
+    "slugify": "^1.6.3",
+    "yup": "^0.32.11"
+  },
+  "devDependencies": {
+    "autoprefixer": "^10.4.0",
+    "gatsby-plugin-postcss": "^5.3.0",
+    "postcss": "^8.4.4",
+    "tailwindcss": "^2.2.19"
   }
 }

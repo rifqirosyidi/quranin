@@ -1,0 +1,49 @@
+.dark {
+  --color-bg-primary: #ffffff;
+  --color-bg-secondary: #f9f9f9;
+  --color-bg-accent: #34d399;
+  --color-text-primary: #374151;
+  --color-text-secondary: #6b7280;
+
+  --color-shadow-primary: rgba(112, 176, 149, 0.2);
+}
+
+.light {
+  --color-bg-primary: #1f2937;
+  --color-bg-secondary: #111827;
+  --color-bg-accent: #34d399;
+  --color-text-primary: #e5e7eb;
+  --color-text-secondary: #9ca3af;
+
+  --color-shadow-primary: rgba(0, 0, 0, 0.2);
+}
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer utilities {
+  .text-last-right {
+    text-align-last: right;
+    -moz-text-align-last: right;
+  }
+  .text-last-left {
+    text-align-last: left;
+    -moz-text-align-last: left;
+  }
+
+  @variants responsive {
+    .text-shadow {
+      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.35);
+    }
+    .text-shadow-md {
+      text-shadow: 4px 4px 8px rgba(0, 0, 0, 0.35);
+    }
+    .text-shadow-lg {
+      text-shadow: 15px 15px 30px rgba(0, 0, 0, 0.35);
+    }
+    .text-shadow-none {
+      text-shadow: none;
+    }
+  }
+}
