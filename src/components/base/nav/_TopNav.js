@@ -1,12 +1,16 @@
 import React, { useContext } from "react";
 import cls from "classnames";
 import { Link } from "gatsby";
-import { FaBell, FaHeadphonesAlt, FaSearch, FaUserAlt } from "react-icons/fa";
+import { FaBell, FaHeadphonesAlt, FaSearch } from "react-icons/fa";
 import ThemeToggle from "../ThemeToggle";
 import { ListeningModeContext } from "../../../context/ListeningModeContext";
+import Search from "../search/Search";
+import useComponentVisible from "../../../hooks/useComponentVisible";
 
 const TopNav = () => {
   const [isListening, setIsListening] = useContext(ListeningModeContext);
+  const { ref, isComponentVisible, setIsComponentVisible } =
+    useComponentVisible(false);
 
   return (
     <div>
@@ -35,6 +39,7 @@ const TopNav = () => {
 
             <div className="w-72">
               <button
+                onClick={() => setIsComponentVisible(true)}
                 type="button"
                 className="flex  items-center justify-between w-full font-primary bg-secondary  text-gray-700 placeholder-gray-400 rounded-md px-4 py-2 focus:outline-none focus:ring-2 focus:ring-gray-400"
               >
@@ -70,6 +75,7 @@ const TopNav = () => {
           </div>
         </div>
       </div>
+      {isComponentVisible && <Search searchRef={ref} />}
     </div>
   );
 };

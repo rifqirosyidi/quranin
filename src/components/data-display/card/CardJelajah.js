@@ -1,5 +1,5 @@
 import React from "react";
-import { FaBookmark, FaStar } from "react-icons/fa";
+import { FaBookmark } from "react-icons/fa";
 
 const CardJelajah = () => {
   return (
