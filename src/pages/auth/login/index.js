@@ -4,11 +4,11 @@ import { FaExclamationCircle, FaFacebookF } from "react-icons/fa";
 import { FcGoogle } from "react-icons/fc";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import { onAuthStateChanged, signInWithEmailAndPassword } from "firebase/auth";
-import { auth } from "../../services/firebase-config";
+import { auth } from "../../../services/firebase-config";
 import * as Yup from "yup";
-import ThemeToggle from "../base/ThemeToggle";
-import Button from "../general/button/Button";
-import Input from "../data-entry/input/Input";
+import ThemeToggle from "../../../components/base/ThemeToggle";
+import Button from "../../../components/general/button/Button";
+import Input from "../../../components/data-entry/input/Input";
 
 const Login = () => {
   const [user, setUser] = useState(null);
@@ -110,7 +110,7 @@ const Login = () => {
 
                   <div className="flex items-center justify-end mt-2">
                     <Link
-                      to="/app/forgot-password"
+                      to="/forgot-password"
                       className="font-primary text-secondary text-xs"
                     >
                       lupa password?
@@ -129,7 +129,7 @@ const Login = () => {
 
       <p className="absolute top-10 right-10 font-primary">
         Tidak punya akun?{" "}
-        <Link to="/app/register" className="text-green-400 underline">
+        <Link to="/register" className="text-green-400 underline">
           Daftar
         </Link>
       </p>

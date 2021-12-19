@@ -10,11 +10,11 @@ import {
   sendEmailVerification,
   updateProfile,
 } from "firebase/auth";
-import ThemeToggle from "../base/ThemeToggle";
-import Button from "../general/button/Button";
-import Input from "../data-entry/input/Input";
-import { auth } from "../../services/firebase-config";
 import toast, { Toaster } from "react-hot-toast";
+import ThemeToggle from "../../../components/base/ThemeToggle";
+import Button from "../../../components/general/button/Button";
+import Input from "../../../components/data-entry/input/Input";
+import { auth } from "../../../services/firebase-config";
 
 const Register = () => {
   const [user, setUser] = useState(null);
@@ -193,7 +193,7 @@ const Register = () => {
 
         <p className="absolute top-10 right-10 font-primary">
           Sudah punya akun?{" "}
-          <Link to="/app/login" className="text-green-400 underline">
+          <Link to="/login" className="text-green-400 underline">
             Login
           </Link>
         </p>

@@ -61,13 +61,13 @@ const TopNav = () => {
             <FaBell className="text-gray-500 text-lg" />
             <ThemeToggle />
             <Link
-              to="/app/login"
+              to="/login"
               className="font-primary text-sm text-secondary hover:text-primary"
             >
               Masuk
             </Link>
             <Link
-              to="/app/register"
+              to="/register"
               className="font-primary text-sm text-secondary hover:text-primary"
             >
               Daftar
