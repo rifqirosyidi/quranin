@@ -16,7 +16,7 @@ import Button from "../../components/general/button/Button";
 import Input from "../../components/data-entry/input/Input";
 import { auth } from "../../services/firebase-config";
 
-const Register = () => {
+const Index = () => {
   const [user, setUser] = useState(null);
 
   onAuthStateChanged(auth, (currentUser) => {
@@ -206,4 +206,4 @@ const Register = () => {
   );
 };
 
-export default Register;
+export default Index;

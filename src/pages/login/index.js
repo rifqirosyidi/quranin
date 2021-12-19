@@ -10,7 +10,7 @@ import ThemeToggle from "../../components/base/ThemeToggle";
 import Button from "../../components/general/button/Button";
 import Input from "../../components/data-entry/input/Input";
 
-const Login = () => {
+const Index = () => {
   const [user, setUser] = useState(null);
 
   onAuthStateChanged(auth, (currentUser) => {
@@ -137,4 +137,4 @@ const Login = () => {
   );
 };
 
-export default Login;
+export default Index;
