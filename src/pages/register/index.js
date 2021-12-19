@@ -1,58 +1,15 @@
-import { Link, navigate } from "gatsby";
-import React, { useEffect, useState } from "react";
+import { Link } from "gatsby";
+import React from "react";
 import { FaExclamationCircle, FaFacebookF } from "react-icons/fa";
 import { FcGoogle } from "react-icons/fc";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
-import {
-  createUserWithEmailAndPassword,
-  onAuthStateChanged,
-  sendEmailVerification,
-  updateProfile,
-} from "firebase/auth";
 import toast, { Toaster } from "react-hot-toast";
 import ThemeToggle from "../../components/base/ThemeToggle";
 import Button from "../../components/general/button/Button";
 import Input from "../../components/data-entry/input/Input";
-import { auth } from "../../services/firebase-config";
 
 const Index = () => {
-  const [user, setUser] = useState(null);
-
-  onAuthStateChanged(auth, (currentUser) => {
-    setUser(currentUser);
-  });
-
-  const register = async (name, email, password) => {
-    try {
-      await createUserWithEmailAndPassword(auth, email, password).catch(
-        (err) => {
-          if (err.code === "auth/weak-password") {
-            toast.error("Password lemah!");
-          }
-          if (err.code === "auth/operation-not-allowed") {
-            toast.error("Operation not allowed!");
-          }
-          if (err.code === "auth/email-already-in-use") {
-            toast.error("Email sudah terdaftar!");
-          }
-        }
-      );
-      await sendEmailVerification(auth.currentUser);
-      await updateProfile(auth.currentUser, { displayName: name });
-
-      toast.success(
-        "Registrasi berhasil, silahkan cek email anda untuk verifikasi",
-        {
-          duration: 7000,
-        }
-      );
-      return "success";
-    } catch (err) {
-      console.log(err);
-    }
-  };
-
   const RegisterSchema = Yup.object().shape({
     name: Yup.string().required("Nama belum di isi"),
     email: Yup.string()
@@ -108,8 +65,7 @@ const Index = () => {
                 initialValues={initialValues}
                 validationSchema={RegisterSchema}
                 onSubmit={async (values, { resetForm }) => {
-                  const { name, email, password } = values;
-                  await register(name, email, password);
+                  console.log(values);
                   resetForm();
                 }}
               >

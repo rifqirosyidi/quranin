@@ -3,30 +3,12 @@ import React, { useState } from "react";
 import { FaExclamationCircle, FaFacebookF } from "react-icons/fa";
 import { FcGoogle } from "react-icons/fc";
 import { Formik, Form, Field, ErrorMessage } from "formik";
-import { onAuthStateChanged, signInWithEmailAndPassword } from "firebase/auth";
-import { auth } from "../../services/firebase-config";
 import * as Yup from "yup";
 import ThemeToggle from "../../components/base/ThemeToggle";
 import Button from "../../components/general/button/Button";
 import Input from "../../components/data-entry/input/Input";
 
 const Index = () => {
-  const [user, setUser] = useState(null);
-
-  onAuthStateChanged(auth, (currentUser) => {
-    setUser(currentUser);
-  });
-
-  const login = async (email, password) => {
-    try {
-      await signInWithEmailAndPassword(auth, email, password);
-    } catch (err) {
-      console.log(err.message);
-    }
-  };
-
-  console.log(user);
-
   const LoginSchema = Yup.object().shape({
     email: Yup.string()
       .email("Email yang anda masukkan tidak valid")
@@ -70,7 +52,7 @@ const Index = () => {
               }}
               validationSchema={LoginSchema}
               onSubmit={({ email, password }) => {
-                login(email, password);
+                cnsole.log(email, password);
               }}
             >
               {({ errors, touched }) => (
