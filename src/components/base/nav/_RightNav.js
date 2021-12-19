@@ -7,8 +7,6 @@ import Button from "../../general/button/Button";
 
 const RightNav = () => {
   const [mySurah] = useContext(SurahContext);
-
-  console.log("SURAH STATE", mySurah);
   return (
     <div className="fixed top-24 right-0 w-60 mr-4 min-h-screen space-y-5">
       <div className="p-4 bg-primary rounded-md shadow-sm">

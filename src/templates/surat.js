@@ -47,8 +47,6 @@ const Surat = ({ data, pageContext }) => {
 
   const chapterSlug = chapter.slug;
   const chapterSlugNext = nextChapter?.slug;
-  console.log("CURR SLUG", chapterSlug);
-  console.log("NEXT SLUG", nextChapter);
 
   const chapterNumber = chapter.number;
   const chapterNameIndonesian = chapter.name.transliteration.id;
