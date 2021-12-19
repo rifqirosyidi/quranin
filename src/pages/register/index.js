@@ -38,7 +38,7 @@ const Index = () => {
           <div className="w-80">
             <div className="flex items-center justify-between">
               <h2 className="font-primary text-2xl font-bold text-primary">
-                Registrasi {user?.email || "not registered"}
+                Registrasi
               </h2>
               <ThemeToggle />
             </div>
