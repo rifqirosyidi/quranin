@@ -11,10 +11,10 @@ import {
   updateProfile,
 } from "firebase/auth";
 import toast, { Toaster } from "react-hot-toast";
-import ThemeToggle from "../../../components/base/ThemeToggle";
-import Button from "../../../components/general/button/Button";
-import Input from "../../../components/data-entry/input/Input";
-import { auth } from "../../../services/firebase-config";
+import ThemeToggle from "../../components/base/ThemeToggle";
+import Button from "../../components/general/button/Button";
+import Input from "../../components/data-entry/input/Input";
+import { auth } from "../../services/firebase-config";
 
 const Register = () => {
   const [user, setUser] = useState(null);

@@ -4,11 +4,11 @@ import { FaExclamationCircle, FaFacebookF } from "react-icons/fa";
 import { FcGoogle } from "react-icons/fc";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import { onAuthStateChanged, signInWithEmailAndPassword } from "firebase/auth";
-import { auth } from "../../../services/firebase-config";
+import { auth } from "../../services/firebase-config";
 import * as Yup from "yup";
-import ThemeToggle from "../../../components/base/ThemeToggle";
-import Button from "../../../components/general/button/Button";
-import Input from "../../../components/data-entry/input/Input";
+import ThemeToggle from "../../components/base/ThemeToggle";
+import Button from "../../components/general/button/Button";
+import Input from "../../components/data-entry/input/Input";
 
 const Login = () => {
   const [user, setUser] = useState(null);
