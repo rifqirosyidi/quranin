@@ -4,6 +4,7 @@ import { FaExclamationCircle, FaFacebookF } from "react-icons/fa";
 import { FcGoogle } from "react-icons/fc";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
+import firebase from "gatsby-plugin-firebase";
 import ThemeToggle from "../../components/base/ThemeToggle";
 import Button from "../../components/general/button/Button";
 import Input from "../../components/data-entry/input/Input";
@@ -15,6 +16,10 @@ const Index = () => {
       .required("Email belum di isi"),
     password: Yup.string().required("Password belum di isi"),
   });
+
+  const login = (email, password) => {
+    firebase.auth().signInWithEmailAndPassword(email, password);
+  };
 
   return (
     <div className="flex relative items-center justify-center min-h-screen w-full text-primary bg-secondary">
@@ -52,7 +57,7 @@ const Index = () => {
               }}
               validationSchema={LoginSchema}
               onSubmit={({ email, password }) => {
-                cnsole.log(email, password);
+                login(email, password);
               }}
             >
               {({ errors, touched }) => (

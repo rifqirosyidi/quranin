@@ -10,9 +10,20 @@ import { useAudioPlayer } from "react-use-audio-player";
 import { ListeningModeContext } from "../../context/ListeningModeContext";
 import { SurahContext } from "../../context/SurahContext";
 
-const AudioPlayer = ({ url, chapterName, chapterSlug, nextVerse }) => {
+const AudioPlayer = ({
+  url,
+  chapterName,
+  chapterSlug,
+  nextVerse,
+  totalVerse,
+  toggleModal,
+}) => {
   const [mySurah, setMySurah] = useContext(SurahContext);
   const [isListening] = useContext(ListeningModeContext);
+
+  if (nextVerse > totalVerse) {
+    toggleModal();
+  }
   const nextLink = `/surat/${chapterSlug}/ayat/${nextVerse}`;
 
   const { togglePlayPause, ready, loading, playing } = useAudioPlayer({

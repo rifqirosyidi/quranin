@@ -3,6 +3,7 @@ import React from "react";
 import { FaExclamationCircle, FaFacebookF } from "react-icons/fa";
 import { FcGoogle } from "react-icons/fc";
 import { Formik, Form, Field, ErrorMessage } from "formik";
+import firebase from "gatsby-plugin-firebase";
 import * as Yup from "yup";
 import toast, { Toaster } from "react-hot-toast";
 import ThemeToggle from "../../components/base/ThemeToggle";
@@ -29,6 +30,10 @@ const Index = () => {
     email: "",
     password: "",
     passwordConfirmation: "",
+  };
+
+  const register = (email, password) => {
+    firebase.auth().createUserWithEmailAndPassword(email, password);
   };
 
   return (
@@ -64,9 +69,8 @@ const Index = () => {
               <Formik
                 initialValues={initialValues}
                 validationSchema={RegisterSchema}
-                onSubmit={async (values, { resetForm }) => {
-                  console.log(values);
-                  resetForm();
+                onSubmit={(values, { resetForm }) => {
+                  register(values);
                 }}
               >
                 {() => (
