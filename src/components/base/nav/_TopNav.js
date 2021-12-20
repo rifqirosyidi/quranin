@@ -1,16 +1,32 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import cls from "classnames";
 import { Link } from "gatsby";
-import { FaBell, FaHeadphonesAlt, FaSearch } from "react-icons/fa";
+import {
+  FaBell,
+  FaCog,
+  FaHeadphonesAlt,
+  FaSearch,
+  FaSignOutAlt,
+} from "react-icons/fa";
 import ThemeToggle from "../ThemeToggle";
 import { ListeningModeContext } from "../../../context/ListeningModeContext";
 import Search from "../search/Search";
 import useComponentVisible from "../../../hooks/useComponentVisible";
+import { useAuth } from "../../../context/FirebaseAuthContext";
 
 const TopNav = () => {
+  const { signOut, getUser } = useAuth();
+  const user = getUser();
+
   const [isListening, setIsListening] = useContext(ListeningModeContext);
   const { ref, isComponentVisible, setIsComponentVisible } =
     useComponentVisible(false);
+
+  const [isProfileDropdownHidden, setIsProfileDropdownHidden] = useState(true);
+
+  const toggleProfileDropdown = () => {
+    setIsProfileDropdownHidden((prev) => !prev);
+  };
 
   return (
     <div>
@@ -60,18 +76,51 @@ const TopNav = () => {
 
             <FaBell className="text-gray-500 text-lg" />
             <ThemeToggle />
-            <Link
-              to="/login"
-              className="font-primary text-sm text-secondary hover:text-primary"
-            >
-              Masuk
-            </Link>
-            <Link
-              to="/register"
-              className="font-primary text-sm text-secondary hover:text-primary"
-            >
-              Daftar
-            </Link>
+            {user ? (
+              <div className="relative">
+                <button
+                  onClick={toggleProfileDropdown}
+                  className="font-primary h-16 flex items-center"
+                >
+                  {user?.displayName}
+                </button>{" "}
+                <div
+                  className={cls(`absolute right-0 -mr-10 `, {
+                    hidden: isProfileDropdownHidden,
+                  })}
+                >
+                  <div className="w-56 bg-primary border-l-2 border-b-2 border-gray-500 font-primary text-secondary shadow-sm rounded-b-md p-6 flex flex-col space-y-4">
+                    <button className="flex items-center space-x-3">
+                      <p>profile</p>
+                    </button>
+                    <button className="flex items-center space-x-3">
+                      <FaCog /> <p>settings</p>
+                    </button>
+                    <button
+                      className="flex items-center space-x-3"
+                      onClick={signOut}
+                    >
+                      <FaSignOutAlt /> <p>logout</p>
+                    </button>
+                  </div>
+                </div>
+              </div>
+            ) : (
+              <>
+                <Link
+                  to="/login"
+                  className="font-primary text-sm text-secondary hover:text-primary"
+                >
+                  Masuk
+                </Link>
+                <Link
+                  to="/register"
+                  className="font-primary text-sm text-secondary hover:text-primary"
+                >
+                  Daftar
+                </Link>
+              </>
+            )}
           </div>
         </div>
       </div>

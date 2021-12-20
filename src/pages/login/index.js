@@ -4,12 +4,19 @@ import { FaExclamationCircle, FaFacebookF } from "react-icons/fa";
 import { FcGoogle } from "react-icons/fc";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
-import firebase from "gatsby-plugin-firebase";
 import ThemeToggle from "../../components/base/ThemeToggle";
 import Button from "../../components/general/button/Button";
 import Input from "../../components/data-entry/input/Input";
+import { useAuth } from "../../context/FirebaseAuthContext";
+import {
+  auth,
+  signInWithFacebook,
+  signInWithGoogle,
+} from "../../services/firebase-config";
 
 const Index = () => {
+  const { login } = useAuth();
+
   const LoginSchema = Yup.object().shape({
     email: Yup.string()
       .email("Email yang anda masukkan tidak valid")
@@ -17,9 +24,11 @@ const Index = () => {
     password: Yup.string().required("Password belum di isi"),
   });
 
-  const login = (email, password) => {
-    firebase.auth().signInWithEmailAndPassword(email, password);
-  };
+  auth.onAuthStateChanged((user) => {
+    if (user) {
+      window.location = "/"; //After successful login, user will be redirected to home.html
+    }
+  });
 
   return (
     <div className="flex relative items-center justify-center min-h-screen w-full text-primary bg-secondary">
@@ -32,19 +41,25 @@ const Index = () => {
             <ThemeToggle />
           </div>
           <div className="flex flex-col space-y-3 my-6">
-            <div className="flex space-x-4 items-center bg-primary px-4 py-3 hover:shadow-primary transition duration-300 transform hover:scale-105 cursor-pointer rounded-md">
+            <button
+              onClick={signInWithGoogle}
+              className="flex space-x-4 items-center bg-primary px-4 py-3 hover:shadow-primary transition duration-300 transform hover:scale-105 cursor-pointer rounded-md"
+            >
               <FcGoogle className="text-" />
               <p className="font-primary text-sm text-secondary">
                 Login dengan Google
               </p>
-            </div>
+            </button>
 
-            <div className="flex space-x-4 items-center bg-primary px-4 py-3 hover:shadow-primary transition duration-300 transform hover:scale-105 cursor-pointer rounded-md">
+            <button
+              onClick={signInWithFacebook}
+              className="flex space-x-4 items-center bg-primary px-4 py-3 hover:shadow-primary transition duration-300 transform hover:scale-105 cursor-pointer rounded-md"
+            >
               <FaFacebookF className="text- text-blue-500" />
               <p className="font-primary text-sm text-secondary">
-                Login dengan Facebook
+                Login dengan Facebook - still in dev.
               </p>
-            </div>
+            </button>
             <div className="py-2 text-center">
               <p className="font-primary text-sm text-secondary">atau</p>
             </div>
@@ -103,7 +118,7 @@ const Index = () => {
                       lupa password?
                     </Link>
                   </div>
-                  <Button type="button" className="w-full mt-4">
+                  <Button type="submit" className="w-full mt-4">
                     Masuk
                   </Button>
                 </Form>
