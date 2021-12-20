@@ -12,12 +12,8 @@ import ThemeToggle from "../ThemeToggle";
 import { ListeningModeContext } from "../../../context/ListeningModeContext";
 import Search from "../search/Search";
 import useComponentVisible from "../../../hooks/useComponentVisible";
-import { useAuth } from "../../../context/FirebaseAuthContext";
 
 const TopNav = () => {
-  const { signOut, getUser } = useAuth();
-  const user = getUser();
-
   const [isListening, setIsListening] = useContext(ListeningModeContext);
   const { ref, isComponentVisible, setIsComponentVisible } =
     useComponentVisible(false);
@@ -26,6 +22,10 @@ const TopNav = () => {
 
   const toggleProfileDropdown = () => {
     setIsProfileDropdownHidden((prev) => !prev);
+  };
+
+  const user = {
+    displayName: "testuser",
   };
 
   return (
@@ -96,10 +96,7 @@ const TopNav = () => {
                     <button className="flex items-center space-x-3">
                       <FaCog /> <p>settings</p>
                     </button>
-                    <button
-                      className="flex items-center space-x-3"
-                      onClick={signOut}
-                    >
+                    <button className="flex items-center space-x-3">
                       <FaSignOutAlt /> <p>logout</p>
                     </button>
                   </div>

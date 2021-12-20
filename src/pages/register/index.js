@@ -8,16 +8,8 @@ import toast, { Toaster } from "react-hot-toast";
 import ThemeToggle from "../../components/base/ThemeToggle";
 import Button from "../../components/general/button/Button";
 import Input from "../../components/data-entry/input/Input";
-import {
-  auth,
-  signInWithFacebook,
-  signInWithGoogle,
-} from "../../services/firebase-config";
-import { useAuth } from "../../context/FirebaseAuthContext";
 
 const Index = () => {
-  const { signUp } = useAuth();
-
   const RegisterSchema = Yup.object().shape({
     name: Yup.string().required("Nama belum di isi"),
     email: Yup.string()
@@ -39,12 +31,6 @@ const Index = () => {
     passwordConfirmation: "",
   };
 
-  auth.onAuthStateChanged((user) => {
-    if (user) {
-      window.location = "/"; //After successful login, user will be redirected to home.html
-    }
-  });
-
   return (
     <>
       <div className="flex relative items-center justify-center min-h-screen w-full text-primary bg-secondary">
@@ -57,20 +43,14 @@ const Index = () => {
               <ThemeToggle />
             </div>
             <div className="flex flex-col space-y-3 my-6">
-              <button
-                onClick={signInWithGoogle}
-                className="flex space-x-4 items-center bg-primary px-4 py-3 hover:shadow-primary transition duration-300 transform hover:scale-105 cursor-pointer rounded-md"
-              >
+              <button className="flex space-x-4 items-center bg-primary px-4 py-3 hover:shadow-primary transition duration-300 transform hover:scale-105 cursor-pointer rounded-md">
                 <FcGoogle className="text-" />
                 <p className="font-primary text-sm text-secondary">
                   Register dengan Google
                 </p>
               </button>
 
-              <button
-                onClick={signInWithFacebook}
-                className="flex space-x-4 items-center bg-primary px-4 py-3 hover:shadow-primary transition duration-300 transform hover:scale-105 cursor-pointer rounded-md"
-              >
+              <button className="flex space-x-4 items-center bg-primary px-4 py-3 hover:shadow-primary transition duration-300 transform hover:scale-105 cursor-pointer rounded-md">
                 <FaFacebookF className="text- text-blue-500" />
                 <p className="font-primary text-sm text-secondary">
                   Register dengan Facebook - still in dev.
@@ -85,7 +65,7 @@ const Index = () => {
                 initialValues={initialValues}
                 validationSchema={RegisterSchema}
                 onSubmit={(values, { resetForm }) => {
-                  signUp(values.name, values.email, values.password);
+                  console.log(values.name, values.email, values.password);
                 }}
               >
                 {() => (
