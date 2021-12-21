@@ -3,6 +3,9 @@ import {
   onAuthStateChanged,
   sendEmailVerification,
   updateProfile,
+  GoogleAuthProvider,
+  signInWithPopup,
+  signInWithEmailAndPassword,
 } from "firebase/auth";
 import { navigate } from "gatsby";
 import React, { createContext, useContext, useEffect, useState } from "react";
@@ -19,7 +22,6 @@ export function FirebaseProvider({ children }) {
   const [app, auth] = useFirebase();
   const [currentUser, setCurrentUser] = useState();
 
-  // Sign up
   const signUp = async (name, email, password) => {
     try {
       const registration = await createUserWithEmailAndPassword(
@@ -53,8 +55,61 @@ export function FirebaseProvider({ children }) {
     }
   };
 
+  const signIn = async (email, password) => {
+    try {
+      const login = await signInWithEmailAndPassword(
+        auth,
+        email,
+        password
+      ).catch((err) => {
+        switch (err.code) {
+          case "auth/invalid-email":
+            toast.error("Email invalid.");
+            break;
+          case "auth/user-disabled":
+            toast.error("User dengan akun ini telah dinonaktifkan.");
+            break;
+          case "auth/user-not-found":
+            toast.error("User dengan email ini tidak ditemukan.");
+            break;
+          case "auth/wrong-password":
+            toast.error("Password salah.");
+            break;
+        }
+      });
+
+      if (login) {
+        navigate("/");
+      }
+    } catch (err) {
+      toast.error(err.message);
+    }
+  };
+
+  const signInWithGoogle = () => {
+    try {
+      const provider = new GoogleAuthProvider();
+      provider.setCustomParameters({ prompt: "select_account" });
+      signInWithPopup(auth, provider)
+        .then(() => {
+          navigate("/");
+        })
+        .catch((error) => {
+          console.log(error.code);
+        });
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  //   Sign In With Fb
+
+  // Login With Email
+
   function signOut() {
-    return auth.signOut();
+    return auth.signOut().then(() => {
+      setCurrentUser(null);
+    });
   }
 
   function getUser() {
@@ -77,9 +132,11 @@ export function FirebaseProvider({ children }) {
 
   const value = {
     currentUser,
+    signUp,
+    signIn,
+    signInWithGoogle,
     getUser,
     signOut,
-    signUp,
   };
 
   return (

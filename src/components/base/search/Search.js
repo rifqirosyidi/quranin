@@ -39,7 +39,7 @@ const Search = ({ searchRef }) => {
                     {results.map(result => (
                       <Link
                         to={result.path}
-                        className="py-4 px-4 font-primary text-sm bg-secondary rounded transition duration-500 hover:bg-tertiary"
+                        className="py-4 px-4 font-primary text-sm bg-secondary rounded transition duration-1000 hover:bg-tertiary"
                         key={result.strapiId}
                       >
                         {result.title}

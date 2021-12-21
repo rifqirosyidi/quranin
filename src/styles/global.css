@@ -18,6 +18,10 @@
   --color-shadow-primary: rgba(0, 0, 0, 0.2);
 }
 
+* {
+  transition: background-color 1s ease;
+}
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;

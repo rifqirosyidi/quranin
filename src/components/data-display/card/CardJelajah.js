@@ -3,7 +3,7 @@ import { FaBookmark } from "react-icons/fa";
 
 const CardJelajah = () => {
   return (
-    <div className="bg-primary p-6 relative rounded-md shadow-sm w-full cursor-pointer transition duration-500 transform hover:-translate-y-2 hover:shadow-primary">
+    <div className="bg-primary p-6 relative rounded-md shadow-sm w-full cursor-pointer transition duration-1000 transform hover:-translate-y-2 hover:shadow-primary">
       <div className="flex flex-col items-start space-y-5">
         <p className="font-secondary text-secondary text-sm">
           Lorem ipsum dolor sit amet consectetur adipisicing elit. Porro

@@ -5,14 +5,18 @@ import {
   FaExclamationCircle,
   FaFacebookF,
 } from "react-icons/fa";
+import { Toaster } from "react-hot-toast";
 import { FcGoogle } from "react-icons/fc";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
 import ThemeToggle from "../../components/base/ThemeToggle";
 import Button from "../../components/general/button/Button";
 import Input from "../../components/data-entry/input/Input";
+import { useFirebaseContext } from "../../context/FirebaseContext";
 
 const Index = () => {
+  const { signIn } = useFirebaseContext();
+
   const LoginSchema = Yup.object().shape({
     email: Yup.string()
       .email("Email yang anda masukkan tidak valid")
@@ -31,14 +35,14 @@ const Index = () => {
             <ThemeToggle />
           </div>
           <div className="flex flex-col space-y-3 my-6">
-            <button className="flex space-x-4 items-center bg-primary px-4 py-3 hover:shadow-primary transition duration-300 transform hover:scale-105 cursor-pointer rounded-md">
+            <button className="flex space-x-4 items-center bg-primary px-4 py-3 hover:shadow-primary transition duration-1000 transform hover:scale-105 cursor-pointer rounded-md">
               <FcGoogle className="text-" />
               <p className="font-primary text-sm text-secondary">
                 Login dengan Google
               </p>
             </button>
 
-            <button className="flex space-x-4 items-center bg-primary px-4 py-3 hover:shadow-primary transition duration-300 transform hover:scale-105 cursor-pointer rounded-md">
+            <button className="flex space-x-4 items-center bg-primary px-4 py-3 hover:shadow-primary transition duration-1000 transform hover:scale-105 cursor-pointer rounded-md">
               <FaFacebookF className="text- text-blue-500" />
               <p className="font-primary text-sm text-secondary">
                 Login dengan Facebook - still in dev.
@@ -55,8 +59,12 @@ const Index = () => {
                 password: "",
               }}
               validationSchema={LoginSchema}
-              onSubmit={({ email, password }) => {
-                console.log(email, password);
+              onSubmit={async (values, { setSubmitting }) => {
+                const { email, password } = values;
+                setSubmitting(true);
+                await signIn(email, password).catch((err) => {
+                  setSubmitting(false);
+                });
               }}
             >
               {({ isSubmitting }) => (
@@ -104,10 +112,10 @@ const Index = () => {
                   </div>
                   <Button type="submit" className="w-full mt-4">
                     {isSubmitting ? (
-                      <p className="flex items-center space-x-2 justify-center cursor-not-allowed">
+                      <div className="flex items-center space-x-2 justify-center cursor-not-allowed">
                         <FaCircleNotch className="animate-spin" />
                         <p>Processing...</p>
-                      </p>
+                      </div>
                     ) : (
                       <p>Masuk</p>
                     )}
@@ -126,6 +134,10 @@ const Index = () => {
           Daftar
         </Link>
       </p>
+
+      <div className="font-primary">
+        <Toaster position="top-right" />
+      </div>
     </div>
   );
 };

@@ -8,14 +8,14 @@ import {
 import { FcGoogle } from "react-icons/fc";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
-import toast, { Toaster } from "react-hot-toast";
+import { Toaster } from "react-hot-toast";
 import ThemeToggle from "../../components/base/ThemeToggle";
 import Button from "../../components/general/button/Button";
 import Input from "../../components/data-entry/input/Input";
 import { useFirebaseContext } from "../../context/FirebaseContext";
 
 const Index = () => {
-  const { signUp } = useFirebaseContext();
+  const { signUp, signInWithGoogle } = useFirebaseContext();
 
   const RegisterSchema = Yup.object().shape({
     name: Yup.string().required("Nama belum di isi"),
@@ -50,14 +50,17 @@ const Index = () => {
               <ThemeToggle />
             </div>
             <div className="flex flex-col space-y-3 my-6">
-              <button className="flex space-x-4 items-center bg-primary px-4 py-3 hover:shadow-primary transition duration-300 transform hover:scale-105 cursor-pointer rounded-md">
+              <button
+                onClick={signInWithGoogle}
+                className="flex space-x-4 items-center bg-primary px-4 py-3 hover:shadow-primary transition duration-1000 transform hover:scale-105 cursor-pointer rounded-md"
+              >
                 <FcGoogle className="text-" />
                 <p className="font-primary text-sm text-secondary">
                   Register dengan Google
                 </p>
               </button>
 
-              <button className="flex space-x-4 items-center bg-primary px-4 py-3 hover:shadow-primary transition duration-300 transform hover:scale-105 cursor-pointer rounded-md">
+              <button className="flex space-x-4 items-center bg-primary px-4 py-3 hover:shadow-primary transition duration-1000 transform hover:scale-105 cursor-pointer rounded-md">
                 <FaFacebookF className="text- text-blue-500" />
                 <p className="font-primary text-sm text-secondary">
                   Register dengan Facebook - still in dev.

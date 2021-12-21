@@ -17,9 +17,9 @@ import { animated } from "@react-spring/web";
 import { useFirebaseContext } from "../../../context/FirebaseContext";
 
 const TopNav = () => {
+  const userLocal = JSON.parse(localStorage.getItem("user")) || false;
   const { getUser, signOut } = useFirebaseContext();
   const user = getUser();
-  const userLocal = JSON.parse(localStorage.getItem("user")) || false;
 
   const [isListening, setIsListening] = useContext(ListeningModeContext);
   const { ref, isComponentVisible, setIsComponentVisible } =

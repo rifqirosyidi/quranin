@@ -4,7 +4,7 @@ const Button = ({ children, type, disabled, className, rest }) => {
   return (
     <button
       type={type}
-      className={`${className} font-primary font-medium px-3 py-1 rounded text-white text-shadow tracking-wider bg-gradient-to-r from-emerald-400 to-emerald-300 shadow hover:shadow-md transition duration-500 transform hover:-translate-y-1`}
+      className={`${className} font-primary font-medium px-3 py-1 rounded text-white text-shadow tracking-wider bg-gradient-to-r from-emerald-400 to-emerald-300 shadow hover:shadow-md transition duration-1000 transform hover:-translate-y-1`}
       {...rest}
     >
       {children}
