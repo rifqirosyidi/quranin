@@ -1,31 +1,27 @@
-// Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
-// TODO: Add SDKs for Firebase products that you want to use
-// https://firebase.google.com/docs/web/setup#available-libraries
+import { getAuth } from "firebase/auth";
 
-// Your web app's Firebase configuration
-// For Firebase JS SDK v7.20.0 and later, measurementId is optional
-const firebaseConfig = {
-  apiKey: "AIzaSyC37l0eI_EmFyJa8dK4wtU7KhYfWU6F01Y",
-  authDomain: "quranin-3a09e.firebaseapp.com",
-  databaseURL:
-    "https://quranin-3a09e-default-rtdb.asia-southeast1.firebasedatabase.app",
-  projectId: "quranin-3a09e",
-  storageBucket: "quranin-3a09e.appspot.com",
-  messagingSenderId: "917258049039",
-  appId: "1:917258049039:web:0151931da226cf9f9a757a",
-  measurementId: "G-JJS1699E3J",
+const config = {
+  apiKey: process.env.GATSBY_FIREBASE_API_KEY,
+  appId: process.env.GATSBY_FIREBASE_APP_ID,
+  authDomain: process.env.GATSBY_FIREBASE_AUTH_DOMAIN,
+  databaseURL: process.env.GATSBY_FIREBASE_DATABASE_URL,
+  messagingSenderId: process.env.GATSBY_FIREBASE_MESSAGING_SENDER_ID,
+  projectId: process.env.GATSBY_FIREBASE_PROJECT_ID,
+  storageBucket: process.env.GATSBY_FIREBASE_STORAGE_BUCKET,
 };
 
-// Initialize Firebase
-let instance = null;
+let app;
+let auth;
 
-export default function getFirebase() {
-  if (typeof window !== "undefined") {
-    if (instance) return instance;
-    instance = initializeApp(firebaseConfig);
-    return instance;
-  }
+export function getFirebase() {
+  if (app) return app;
+  app = initializeApp(config);
+  return app;
+}
 
-  return null;
+export function getFirebaseAuth() {
+  if (auth) return auth;
+  auth = getAuth(getFirebase());
+  return auth;
 }

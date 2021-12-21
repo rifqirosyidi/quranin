@@ -1,5 +1,5 @@
 import { Link } from "gatsby";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { FaExclamationCircle, FaFacebookF } from "react-icons/fa";
 import { FcGoogle } from "react-icons/fc";
 import { Formik, Form, Field, ErrorMessage } from "formik";
@@ -8,8 +8,28 @@ import toast, { Toaster } from "react-hot-toast";
 import ThemeToggle from "../../components/base/ThemeToggle";
 import Button from "../../components/general/button/Button";
 import Input from "../../components/data-entry/input/Input";
+import useFirebase from "../../hooks/useFirebase";
+import {
+  onAuthStateChanged,
+  createUserWithEmailAndPassword,
+} from "firebase/auth";
 
 const Index = () => {
+  const [app, auth] = useFirebase();
+  const [user, setUser] = useState();
+
+  useEffect(() => {
+    if (!app) return;
+    onAuthStateChanged(auth, (currentUser) => {
+      setUser(currentUser);
+    });
+  }, [app, auth]);
+
+  const handleRegister = (email, password) => {
+    if (!app) return;
+    createUserWithEmailAndPassword(auth, email, password);
+  };
+
   const RegisterSchema = Yup.object().shape({
     name: Yup.string().required("Nama belum di isi"),
     email: Yup.string()
@@ -65,7 +85,7 @@ const Index = () => {
                 initialValues={initialValues}
                 validationSchema={RegisterSchema}
                 onSubmit={(values, { resetForm }) => {
-                  console.log(values.name, values.email, values.password);
+                  handleRegister(values.email, values.password);
                 }}
               >
                 {() => (
