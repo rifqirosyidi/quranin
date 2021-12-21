@@ -122,10 +122,12 @@ export function FirebaseProvider({ children }) {
       setCurrentUser(currentUser);
       if (currentUser) {
         // store the user on local storage
-        localStorage.setItem("user", true);
+        typeof window !== "undefined"
+          ? localStorage.setItem("user", true)
+          : null;
       } else {
         // removes the user from local storage on logOut
-        localStorage.removeItem("user");
+        typeof window !== "undefined" ? localStorage.removeItem("user") : null;
       }
     });
   }, [app, auth]);

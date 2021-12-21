@@ -17,7 +17,10 @@ import { animated } from "@react-spring/web";
 import { useFirebaseContext } from "../../../context/FirebaseContext";
 
 const TopNav = () => {
-  const userLocal = JSON.parse(localStorage.getItem("user")) || false;
+  const userLocal =
+    typeof window !== "undefined"
+      ? JSON.parse(localStorage.getItem("user")) || false
+      : null;
   const { getUser, signOut } = useFirebaseContext();
   const user = getUser();
 
