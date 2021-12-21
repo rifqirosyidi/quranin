@@ -1,4 +1,3 @@
-import { getAuth } from "firebase/auth";
 import { useEffect, useState } from "react";
 import { getFirebase, getFirebaseAuth } from "../services/firebase-config";
 

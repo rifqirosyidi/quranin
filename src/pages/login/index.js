@@ -1,6 +1,10 @@
 import { Link } from "gatsby";
-import React, { useState } from "react";
-import { FaExclamationCircle, FaFacebookF } from "react-icons/fa";
+import React from "react";
+import {
+  FaCircleNotch,
+  FaExclamationCircle,
+  FaFacebookF,
+} from "react-icons/fa";
 import { FcGoogle } from "react-icons/fc";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
@@ -55,7 +59,7 @@ const Index = () => {
                 console.log(email, password);
               }}
             >
-              {({ errors, touched }) => (
+              {({ isSubmitting }) => (
                 <Form>
                   <div className="space-y-4">
                     <Field
@@ -99,7 +103,14 @@ const Index = () => {
                     </Link>
                   </div>
                   <Button type="submit" className="w-full mt-4">
-                    Masuk
+                    {isSubmitting ? (
+                      <p className="flex items-center space-x-2 justify-center cursor-not-allowed">
+                        <FaCircleNotch className="animate-spin" />
+                        <p>Processing...</p>
+                      </p>
+                    ) : (
+                      <p>Masuk</p>
+                    )}
                   </Button>
                 </Form>
               )}
@@ -109,7 +120,7 @@ const Index = () => {
         <hr />
       </div>
 
-      <p className="absolute top-10 right-10 font-primary">
+      <p className="absolute bottom-10 right-10 font-primary">
         Tidak punya akun?{" "}
         <Link to="/register" className="text-green-400 underline">
           Daftar

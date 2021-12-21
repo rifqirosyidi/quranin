@@ -1,6 +1,10 @@
-import { Link } from "gatsby";
+import { Link, navigate } from "gatsby";
 import React, { useEffect, useState } from "react";
-import { FaExclamationCircle, FaFacebookF } from "react-icons/fa";
+import {
+  FaCircleNotch,
+  FaExclamationCircle,
+  FaFacebookF,
+} from "react-icons/fa";
 import { FcGoogle } from "react-icons/fc";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
@@ -8,27 +12,10 @@ import toast, { Toaster } from "react-hot-toast";
 import ThemeToggle from "../../components/base/ThemeToggle";
 import Button from "../../components/general/button/Button";
 import Input from "../../components/data-entry/input/Input";
-import useFirebase from "../../hooks/useFirebase";
-import {
-  onAuthStateChanged,
-  createUserWithEmailAndPassword,
-} from "firebase/auth";
+import { useFirebaseContext } from "../../context/FirebaseContext";
 
 const Index = () => {
-  const [app, auth] = useFirebase();
-  const [user, setUser] = useState();
-
-  useEffect(() => {
-    if (!app) return;
-    onAuthStateChanged(auth, (currentUser) => {
-      setUser(currentUser);
-    });
-  }, [app, auth]);
-
-  const handleRegister = (email, password) => {
-    if (!app) return;
-    createUserWithEmailAndPassword(auth, email, password);
-  };
+  const { signUp } = useFirebaseContext();
 
   const RegisterSchema = Yup.object().shape({
     name: Yup.string().required("Nama belum di isi"),
@@ -85,10 +72,10 @@ const Index = () => {
                 initialValues={initialValues}
                 validationSchema={RegisterSchema}
                 onSubmit={(values, { resetForm }) => {
-                  handleRegister(values.email, values.password);
+                  signUp(values.name, values.email, values.password);
                 }}
               >
-                {() => (
+                {({ isSubmitting }) => (
                   <Form>
                     <div className="space-y-4">
                       <Field
@@ -155,8 +142,19 @@ const Index = () => {
                       />
                     </div>
 
-                    <Button type="submit" className="w-full mt-6">
-                      Register
+                    <Button
+                      type="submit"
+                      disabled={true}
+                      className="w-full mt-6"
+                    >
+                      {isSubmitting ? (
+                        <p className="flex items-center space-x-2 justify-center cursor-not-allowed">
+                          <FaCircleNotch className="animate-spin" />
+                          <p>Processing...</p>
+                        </p>
+                      ) : (
+                        <p>Register</p>
+                      )}
                     </Button>
                   </Form>
                 )}
@@ -166,7 +164,7 @@ const Index = () => {
           <hr />
         </div>
 
-        <p className="absolute top-10 right-10 font-primary">
+        <p className="absolute bottom-10 right-10 font-primary">
           Sudah punya akun?{" "}
           <Link to="/login" className="text-green-400 underline">
             Login

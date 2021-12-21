@@ -12,21 +12,35 @@ import ThemeToggle from "../ThemeToggle";
 import { ListeningModeContext } from "../../../context/ListeningModeContext";
 import Search from "../search/Search";
 import useComponentVisible from "../../../hooks/useComponentVisible";
+import { config, useTransition } from "@react-spring/core";
+import { animated } from "@react-spring/web";
+import { useFirebaseContext } from "../../../context/FirebaseContext";
 
 const TopNav = () => {
+  const { getUser, signOut } = useFirebaseContext();
+  const user = getUser();
+  const userLocal = JSON.parse(localStorage.getItem("user")) || false;
+
   const [isListening, setIsListening] = useContext(ListeningModeContext);
   const { ref, isComponentVisible, setIsComponentVisible } =
     useComponentVisible(false);
 
-  const [isProfileDropdownHidden, setIsProfileDropdownHidden] = useState(true);
+  const [isProfileDropdown, setIsProfileDropdown] = useState(false);
 
   const toggleProfileDropdown = () => {
-    setIsProfileDropdownHidden((prev) => !prev);
+    setIsProfileDropdown((prev) => !prev);
   };
 
-  const user = {
-    displayName: "testuser",
-  };
+  const transitions = useTransition(isProfileDropdown, {
+    initial: null,
+    from: { opacity: 0, x: 230 },
+    enter: { opacity: 1, x: 0 },
+    leave: { opacity: 0, x: 230 },
+    reverse: isProfileDropdown,
+    delay: 200,
+    config: config.molasses,
+    onRest: () => setIsProfileDropdown((prev) => !prev),
+  });
 
   return (
     <div>
@@ -76,31 +90,39 @@ const TopNav = () => {
 
             <FaBell className="text-gray-500 text-lg" />
             <ThemeToggle />
-            {user ? (
+            {userLocal ? (
               <div className="relative">
                 <button
-                  onClick={toggleProfileDropdown}
+                  onClick={() => toggleProfileDropdown()}
                   className="font-primary h-16 flex items-center"
                 >
                   {user?.displayName}
-                </button>{" "}
-                <div
-                  className={cls(`absolute right-0 -mr-10 `, {
-                    hidden: isProfileDropdownHidden,
-                  })}
-                >
-                  <div className="w-56 bg-primary border-l-2 border-b-2 border-gray-500 font-primary text-secondary shadow-sm rounded-b-md p-6 flex flex-col space-y-4">
-                    <button className="flex items-center space-x-3">
-                      <p>profile</p>
-                    </button>
-                    <button className="flex items-center space-x-3">
-                      <FaCog /> <p>settings</p>
-                    </button>
-                    <button className="flex items-center space-x-3">
-                      <FaSignOutAlt /> <p>logout</p>
-                    </button>
-                  </div>
-                </div>
+                </button>
+
+                {transitions(
+                  (styles, item) =>
+                    item && (
+                      <animated.div
+                        style={styles}
+                        className="absolute right-0 -mr-10"
+                      >
+                        <div className="w-56 bg-primary font-primary text-secondary shadow-sm rounded-b-md p-6 flex flex-col space-y-4">
+                          <button className="flex items-center space-x-3">
+                            <p>profile</p>
+                          </button>
+                          <button className="flex items-center space-x-3">
+                            <FaCog /> <p>settings</p>
+                          </button>
+                          <button
+                            onClick={signOut}
+                            className="flex items-center space-x-3"
+                          >
+                            <FaSignOutAlt /> <p>logout</p>
+                          </button>
+                        </div>
+                      </animated.div>
+                    )
+                )}
               </div>
             ) : (
               <>
