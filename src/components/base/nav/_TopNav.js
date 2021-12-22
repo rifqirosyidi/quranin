@@ -42,15 +42,20 @@ const TopNav = () => {
     reverse: isProfileDropdown,
     delay: 200,
     config: config.molasses,
-    onRest: () => setIsProfileDropdown((prev) => !prev),
+    onRest: () => {
+      if (user) {
+        setIsProfileDropdown((prev) => !prev);
+      }
+      setIsProfileDropdown(false);
+    },
   });
 
   return (
     <div>
-      <div className="fixed left-0 top-0 right-0 h-16 shadow-sm flex items-center bg-primary text-primary z-50">
-        <div className="flex items-center justify-between w-full ml-4 mr-10">
+      <div className="fixed left-0 top-0 right-0 h-16 shadow-none flex items-center bg-primary text-primary z-50">
+        <div className="flex container mx-auto items-center justify-between w-full ">
           <div className="flex space-x-4 mr-8 items-center">
-            <p className="font-primary text-gray-700 font-bold text-xl w-9 h-9 bg-emerald-300 rounded-md mr-8"></p>
+            <p className="font-primary text-gray-700 font-bold text-xl w-9 h-9 bg-emerald-300 rounded-xl mr-8"></p>
             <p className="font-primary font-bold text-xl">quran</p>
             <p className="font-primary text-secondary font-medium text-xl ">
               hadits
@@ -74,7 +79,7 @@ const TopNav = () => {
               <button
                 onClick={() => setIsComponentVisible(true)}
                 type="button"
-                className="flex  items-center justify-between w-full font-primary bg-secondary  text-gray-700 placeholder-gray-400 rounded-md px-4 py-2 focus:outline-none focus:ring-2 focus:ring-gray-400"
+                className="flex  items-center justify-between w-full font-primary bg-secondary  text-gray-700 placeholder-gray-400 rounded-xl px-4 py-2 focus:outline-none focus:ring-2 focus:ring-gray-400"
               >
                 <div className="flex items-center space-x-4">
                   <FaSearch className="text-gray-500" />
@@ -109,13 +114,19 @@ const TopNav = () => {
                         style={styles}
                         className="absolute right-0 -mr-10"
                       >
-                        <div className="w-56 bg-primary font-primary text-secondary shadow-sm rounded-b-md p-6 flex flex-col space-y-4">
-                          <button className="flex items-center space-x-3">
+                        <div className="w-56 bg-primary font-primary text-secondary shadow-none rounded-b-md p-6 flex flex-col space-y-4">
+                          <Link
+                            to="/authenticate/profile"
+                            className="flex items-center space-x-3"
+                          >
                             <p>profile</p>
-                          </button>
-                          <button className="flex items-center space-x-3">
+                          </Link>
+                          <Link
+                            to="/authenticate/settings"
+                            className="flex items-center space-x-3"
+                          >
                             <FaCog /> <p>settings</p>
-                          </button>
+                          </Link>
                           <button
                             onClick={signOut}
                             className="flex items-center space-x-3"
@@ -130,13 +141,13 @@ const TopNav = () => {
             ) : (
               <>
                 <Link
-                  to="/login"
+                  to="/authenticate/login"
                   className="font-primary text-sm text-secondary hover:text-primary"
                 >
                   Masuk
                 </Link>
                 <Link
-                  to="/register"
+                  to="/authenticate/register"
                   className="font-primary text-sm text-secondary hover:text-primary"
                 >
                   Daftar

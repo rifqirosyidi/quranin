@@ -48,8 +48,8 @@ const ViewAndSort = ({ listSurat, setListSurat }) => {
             })
           }
           className={cls(
-            "px-6 py-4 flex flex-col items-start justify-between rounded-md",
-            { "bg-primary shadow-sm": mySurah.viewPreference === "grid" }
+            "px-6 py-4 flex flex-col items-start justify-between rounded-xl",
+            { "bg-primary shadow-none": mySurah.viewPreference === "grid" }
           )}
         >
           <p className="font-secondary text-sm text-secondary">Tampilan</p>
@@ -63,8 +63,8 @@ const ViewAndSort = ({ listSurat, setListSurat }) => {
             })
           }
           className={cls(
-            "px-6 py-4 flex flex-col items-start justify-between rounded-md",
-            { "bg-primary shadow-sm": mySurah.viewPreference === "list" }
+            "px-6 py-4 flex flex-col items-start justify-between rounded-xl",
+            { "bg-primary shadow-none": mySurah.viewPreference === "list" }
           )}
         >
           <p className="font-secondary text-sm text-secondary">Tampilan</p>
@@ -74,8 +74,8 @@ const ViewAndSort = ({ listSurat, setListSurat }) => {
       <div className="flex space-x-5">
         <button
           onClick={toggleSortSeries}
-          className={cls("px-6 py-4 rounded-md w-40", {
-            "bg-primary shadow-sm": currentSort === "seri",
+          className={cls("px-6 py-4 rounded-xl w-40", {
+            "bg-primary shadow-none": currentSort === "seri",
           })}
         >
           <div>

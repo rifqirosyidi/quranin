@@ -20,7 +20,7 @@ module.exports = {
 
       "3xl": "0 35px 60px -15px rgba(0, 0, 0, 0.3)",
       inner: "inset 0 2px 4px 0 rgba(0, 0, 0, 0.06)",
-      primary: "0 16px 40px 0 var(--color-shadow-primary)",
+      primary: "0 16px 40px 0 var(--color-shadow-none)",
       none: "none",
     },
     extend: {

@@ -1,5 +1,5 @@
-import { Link, navigate } from "gatsby";
-import React, { useEffect, useState } from "react";
+import { Link } from "gatsby";
+import React from "react";
 import {
   FaCircleNotch,
   FaExclamationCircle,
@@ -9,12 +9,12 @@ import { FcGoogle } from "react-icons/fc";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
 import { Toaster } from "react-hot-toast";
-import ThemeToggle from "../../components/base/ThemeToggle";
-import Button from "../../components/general/button/Button";
-import Input from "../../components/data-entry/input/Input";
-import { useFirebaseContext } from "../../context/FirebaseContext";
+import ThemeToggle from "../../base/ThemeToggle";
+import Button from "../../general/button/Button";
+import Input from "../../data-entry/input/Input";
+import { useFirebaseContext } from "../../../context/FirebaseContext";
 
-const Index = () => {
+const Register = () => {
   const { signUp, signInWithGoogle } = useFirebaseContext();
 
   const RegisterSchema = Yup.object().shape({
@@ -41,7 +41,7 @@ const Index = () => {
   return (
     <>
       <div className="flex relative items-center justify-center min-h-screen w-full text-primary bg-secondary">
-        <div className="flex items-center justify-center p-10 text-left  rounded-md">
+        <div className="flex items-center justify-center p-10 text-left  rounded-xl">
           <div className="w-80">
             <div className="flex items-center justify-between">
               <h2 className="font-primary text-2xl font-bold text-primary">
@@ -52,7 +52,7 @@ const Index = () => {
             <div className="flex flex-col space-y-3 my-6">
               <button
                 onClick={signInWithGoogle}
-                className="flex space-x-4 items-center bg-primary px-4 py-3 hover:shadow-primary transition duration-1000 transform hover:scale-105 cursor-pointer rounded-md"
+                className="flex space-x-4 items-center bg-primary px-4 py-3 hover:shadow-primary transition duration-1000 transform hover:scale-105 cursor-pointer rounded-xl"
               >
                 <FcGoogle className="text-" />
                 <p className="font-primary text-sm text-secondary">
@@ -60,7 +60,7 @@ const Index = () => {
                 </p>
               </button>
 
-              <button className="flex space-x-4 items-center bg-primary px-4 py-3 hover:shadow-primary transition duration-1000 transform hover:scale-105 cursor-pointer rounded-md">
+              <button className="flex space-x-4 items-center bg-primary px-4 py-3 hover:shadow-primary transition duration-1000 transform hover:scale-105 cursor-pointer rounded-xl">
                 <FaFacebookF className="text- text-blue-500" />
                 <p className="font-primary text-sm text-secondary">
                   Register dengan Facebook - still in dev.
@@ -182,4 +182,4 @@ const Index = () => {
   );
 };
 
-export default Index;
+export default Register;

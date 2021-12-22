@@ -5,7 +5,7 @@
   --color-text-primary: #374151;
   --color-text-secondary: #6b7280;
 
-  --color-shadow-primary: rgba(112, 176, 149, 0.2);
+  --color-shadow-none: rgba(112, 176, 149, 0.2);
 }
 
 .light {
@@ -15,13 +15,34 @@
   --color-text-primary: #e5e7eb;
   --color-text-secondary: #9ca3af;
 
-  --color-shadow-primary: rgba(0, 0, 0, 0.2);
+  --color-shadow-none: rgba(0, 0, 0, 0.2);
 }
 
 * {
   transition: background-color 1s ease;
 }
 
+.toggle-style.react-toggle--checked .react-toggle-track {
+  background-color: var(--color-bg-accent);
+}
+
+.toggle-style.react-toggle--checked:hover:not(.react-toggle--disabled)
+  .react-toggle-track {
+  background-color: var(--color-bg-accent);
+}
+
+.toggle-style.react-toggle:hover:not(.react-toggle--disabled)
+  .react-toggle-track {
+  background-color: var(--color-text-secondary);
+}
+.toggle-style .react-toggle-track {
+  background-color: var(--color-bg-secondary);
+}
+
+.react-toggle-thumb {
+  border: var(--color-bg-primary) !important;
+  background-color: var(--color-bg-primary) !important;
+}
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -40,7 +61,7 @@
     .text-shadow {
       text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.35);
     }
-    .text-shadow-md {
+    .text-shadow-none {
       text-shadow: 4px 4px 8px rgba(0, 0, 0, 0.35);
     }
     .text-shadow-lg {

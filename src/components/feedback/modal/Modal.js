@@ -31,7 +31,7 @@ export const ModalTrophy = ({ modalRef, title, description, children }) => {
           <BsStars className="absolute top-20 right-20 text-yellow-400" />
           <BsStars className="absolute top-32 left-20 text-yellow-400" />
           <div className="text-center pb-5">
-            <div className="p-4 rounded-lg shadow-primary bg-gray-900 mb-5">
+            <div className="p-4 rounded-lg shadow-none bg-gray-900 mb-5">
               <Trophy className="w-20 mx-auto m-10" />
             </div>
             <h2 className="font-primary text-lg font-bold tracking-wider">

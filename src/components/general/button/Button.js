@@ -1,10 +1,22 @@
 import React from "react";
+import { variantMap } from "./constant";
+import cls from "classnames";
 
-const Button = ({ children, type, disabled, className, rest }) => {
+const Button = ({
+  children,
+  type,
+  variant = "primary",
+  disabled,
+  className,
+  rest,
+}) => {
   return (
     <button
       type={type}
-      className={`${className} font-primary font-medium px-3 py-1 rounded text-white text-shadow tracking-wider bg-gradient-to-r from-emerald-400 to-emerald-300 shadow hover:shadow-md transition duration-1000 transform hover:-translate-y-1`}
+      className={cls(
+        variantMap[variant],
+        `${className} font-primary font-medium px-3 py-2 rounded-md tracking-wider shadow hover:shadow-primary transition duration-1000 transform hover:-translate-y-1`
+      )}
       {...rest}
     >
       {children}

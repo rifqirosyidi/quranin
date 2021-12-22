@@ -139,7 +139,7 @@ const Surat = ({ data, pageContext }) => {
         </div>
 
         <div className="flex flex-col items-center justify-center py-10 mx-20">
-          <div className="bg-primary  rounded-md shadow-sm">
+          <div className="bg-primary  rounded-xl shadow-none">
             <div className="flex justify-between p-4">
               <AudioPlayerProvider>
                 <AudioPlayer

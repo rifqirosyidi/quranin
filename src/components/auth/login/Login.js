@@ -9,13 +9,13 @@ import { Toaster } from "react-hot-toast";
 import { FcGoogle } from "react-icons/fc";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
-import ThemeToggle from "../../components/base/ThemeToggle";
-import Button from "../../components/general/button/Button";
-import Input from "../../components/data-entry/input/Input";
-import { useFirebaseContext } from "../../context/FirebaseContext";
+import ThemeToggle from "../../base/ThemeToggle";
+import Button from "../../general/button/Button";
+import Input from "../../data-entry/input/Input";
+import { useFirebaseContext } from "../../../context/FirebaseContext";
 
-const Index = () => {
-  const { signIn } = useFirebaseContext();
+const Login = () => {
+  const { signIn, signInWithGoogle } = useFirebaseContext();
 
   const LoginSchema = Yup.object().shape({
     email: Yup.string()
@@ -26,7 +26,7 @@ const Index = () => {
 
   return (
     <div className="flex relative items-center justify-center min-h-screen w-full text-primary bg-secondary">
-      <div className="flex items-center justify-center p-10 text-left  rounded-md">
+      <div className="flex items-center justify-center p-10 text-left  rounded-xl">
         <div className="w-80">
           <div className="flex items-center justify-between">
             <h2 className="font-primary text-2xl font-bold text-primary">
@@ -35,14 +35,17 @@ const Index = () => {
             <ThemeToggle />
           </div>
           <div className="flex flex-col space-y-3 my-6">
-            <button className="flex space-x-4 items-center bg-primary px-4 py-3 hover:shadow-primary transition duration-1000 transform hover:scale-105 cursor-pointer rounded-md">
+            <button
+              onClick={signInWithGoogle}
+              className="flex space-x-4 items-center bg-primary px-4 py-3 hover:shadow-primary transition duration-1000 transform hover:scale-105 cursor-pointer rounded-xl"
+            >
               <FcGoogle className="text-" />
               <p className="font-primary text-sm text-secondary">
                 Login dengan Google
               </p>
             </button>
 
-            <button className="flex space-x-4 items-center bg-primary px-4 py-3 hover:shadow-primary transition duration-1000 transform hover:scale-105 cursor-pointer rounded-md">
+            <button className="flex space-x-4 items-center bg-primary px-4 py-3 hover:shadow-primary transition duration-1000 transform hover:scale-105 cursor-pointer rounded-xl">
               <FaFacebookF className="text- text-blue-500" />
               <p className="font-primary text-sm text-secondary">
                 Login dengan Facebook - still in dev.
@@ -130,7 +133,7 @@ const Index = () => {
 
       <p className="absolute bottom-10 right-10 font-primary">
         Tidak punya akun?{" "}
-        <Link to="/register" className="text-green-400 underline">
+        <Link to="/authenticate/register" className="text-green-400 underline">
           Daftar
         </Link>
       </p>
@@ -142,4 +145,4 @@ const Index = () => {
   );
 };
 
-export default Index;
+export default Login;

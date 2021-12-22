@@ -10,8 +10,8 @@ const CardInfo = ({
   buttonLabel,
 }) => {
   return (
-    <div className="p-4 bg-primary rounded-md shadow-sm">
-      <h2 className="font-primary font-bold text-secondary tracking-wide font-lg mb-2">
+    <div className="p-4 bg-primary rounded-xl shadow-none">
+      <h2 className="font-primary font-bold tracking-wide font-lg mb-2">
         {title}
       </h2>
       <div className="flex items-end justify-between">

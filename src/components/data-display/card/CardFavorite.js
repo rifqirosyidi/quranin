@@ -2,7 +2,7 @@ import React from "react";
 
 const CardFavorite = () => {
   return (
-    <div className="bg-primary rounded-md p-4 shadow-sm">
+    <div className="bg-primary rounded-xl p-4 shadow-none">
       <div className="flex justify-between items-start">
         <div>
           <h2 className="font-primary font-bold text-sm">Al-Fatihah</h2>

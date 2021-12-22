@@ -39,6 +39,9 @@ export function FirebaseProvider({ children }) {
           case "auth/invalid-email":
             toast.error("Email tidak valid");
             break;
+          default:
+            toast.error("Internal Error");
+            break;
         }
       });
       await sendEmailVerification(auth.currentUser).catch((err) =>
@@ -75,6 +78,9 @@ export function FirebaseProvider({ children }) {
           case "auth/wrong-password":
             toast.error("Password salah.");
             break;
+          default:
+            toast.error("Internal Error");
+            break;
         }
       });
 
@@ -109,6 +115,7 @@ export function FirebaseProvider({ children }) {
   function signOut() {
     return auth.signOut().then(() => {
       setCurrentUser(null);
+      navigate("/");
     });
   }
 
@@ -122,12 +129,14 @@ export function FirebaseProvider({ children }) {
       setCurrentUser(currentUser);
       if (currentUser) {
         // store the user on local storage
-        typeof window !== "undefined"
-          ? localStorage.setItem("user", true)
-          : null;
+        if (typeof window !== "undefined") {
+          localStorage.setItem("user", true);
+        }
       } else {
         // removes the user from local storage on logOut
-        typeof window !== "undefined" ? localStorage.removeItem("user") : null;
+        if (typeof window !== "undefined") {
+          localStorage.removeItem("user");
+        }
       }
     });
   }, [app, auth]);

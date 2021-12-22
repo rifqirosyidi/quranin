@@ -3,13 +3,16 @@ import { Circle, Line } from "rc-progress";
 import Layout from "../components/base/Layout";
 import { FaCheck, FaCheckCircle, FaUserCircle } from "react-icons/fa";
 import Button from "../components/general/button/Button";
+import { useFirebaseContext } from "../context/FirebaseContext";
 
 const Index = () => {
+  const { getUser } = useFirebaseContext();
+  const user = getUser();
   return (
     <Layout>
       <div className="h-full">
         <div className="grid grid-cols-4 gap-5">
-          <div className="col-span-3 rounded-md bg-primary shadow-sm">
+          <div className="col-span-3 rounded-xl bg-primary shadow-none">
             <div className="flex items-end justify-between p-8">
               <div>
                 <p className="text-primary font-primary font-bold mb-10">
@@ -41,21 +44,23 @@ const Index = () => {
                 البقرة
               </p>
             </div>
-            <Line
-              percent="20"
-              strokeWidth=".5"
-              strokeLinecap="round"
-              trailWidth=".5"
-              strokeColor="#34d399"
-              trailColor="#34d39933"
-            />
+            <div className="mx-6 mb-6">
+              <Line
+                percent="20"
+                strokeWidth=".5"
+                strokeLinecap="round"
+                trailWidth=".5"
+                strokeColor="#34d399"
+                trailColor="#34d39933"
+              />
+            </div>
           </div>
-          <div className="bg-primary rounded-md p-8 shadow-sm flex flex-col justify-between">
+          <div className="bg-primary rounded-xl p-8 shadow-none flex flex-col justify-between">
             <div className="flex items-center justify-between mb-4">
               <p className="font-primary text-sm">
                 Salam,{" "}
                 <span className="block font-bold text-2xl text-emerald-400">
-                  Rifqi
+                  {user ? user.displayName : "'Alaikum"}
                 </span>
               </p>
               <FaUserCircle className="text-5xl text-secondary" />
@@ -82,7 +87,7 @@ const Index = () => {
           </div>
         </div>
         <div className="mt-6 grid grid-cols-4 gap-6">
-          <div className="col-span-2 bg-primary rounded-md p-6 shadow-sm">
+          <div className="col-span-2 bg-primary rounded-xl p-6 shadow-none">
             <div className="flex items-center justify-between">
               <p className="font-primary font-bold">Minggu ini</p>
               <p className="font-primary text-secondary text-sm">
@@ -120,17 +125,17 @@ const Index = () => {
               </div>
             </div>
           </div>
-          <div className="bg-primary rounded-md p-6 shadow-sm">
-            <div className="flex space-x-10">
+          <div className="bg-primary rounded-xl p-6 shadow-none">
+            <div className="flex">
               <div className="flex flex-col items-center justify-between">
                 <p className="font-primary font-bold">Progress</p>
                 <p className="font-primary text-secondary text-sm">
                   khatamul quran
                 </p>
               </div>
-              <div className="relative w-full">
+              <div className="relative w-full ml-20">
                 <Circle
-                  className="rounded-full shadow-md"
+                  className="rounded-full shadow-none"
                   percent="3"
                   strokeWidth="3"
                   strokeLinecap="round"
@@ -145,7 +150,7 @@ const Index = () => {
             </div>
           </div>
           <div className="grid grid-flow-row  gap-6">
-            <div className="p-6 bg-primary rounded-md shadow-sm">
+            <div className="p-6 bg-primary rounded-xl shadow-none">
               <p className="font-primary font-bold">Estimasi khatam</p>
               <div className="flex items-center justify-between">
                 <p className="font-primary text-secondary text-sm mt-2">
@@ -156,19 +161,19 @@ const Index = () => {
                 </p>
               </div>
             </div>
-            <div className="p-6 bg-primary rounded-md shadow-sm flex justify-between items-center">
+            <div className="p-6 bg-primary rounded-xl shadow-none flex justify-between items-center">
               <p className="font-primary font-bold">Ayat dibaca hari ini</p>
               <p className="font-primary font-bold text-green-400"> 34</p>
             </div>
           </div>
-          <div className="col-span-2 bg-primary rounded-md p-6 shadow-sm">
+          <div className="col-span-2 bg-primary rounded-xl p-6 shadow-none">
             <div className="flex items-center justify-between">
               <p className="font-primary font-bold">Juga membaca surat</p>
               <p className="font-primary text-secondary">Ali Imran - 42</p>
               <Button>lanjutkan</Button>
             </div>
           </div>
-          <div className="col-span-2 bg-primary rounded-md p-6 shadow-sm">
+          <div className="col-span-2 bg-primary rounded-xl p-6 shadow-none">
             <div className="flex items-center justify-between">
               <p className="font-primary font-bold">Terkakhir didengar</p>
               <p className="font-primary text-secondary">Ali Imran - 42</p>
