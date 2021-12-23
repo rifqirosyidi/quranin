@@ -39,10 +39,10 @@ const RightNav = () => {
           </div>
         </div>
       </div>
-
       <CardInfo
         title="Terakhir dibaca"
         chapter={mySurah.lastReadChapter || ""}
+        chapterSlug={mySurah.lastReadSlug || ""}
         verse={mySurah.lastReadVerse || ""}
         buttonLabel={<FaChevronRight />}
         icon={<FaBookReader className="text-secondary" />}
@@ -51,6 +51,7 @@ const RightNav = () => {
       <CardInfo
         title="Terakhir didengar"
         chapter={mySurah.lastListenChapter || ""}
+        chapterSlug={mySurah.lastListenSlug || ""}
         verse={mySurah.lastListenVerse || ""}
         buttonLabel={<FaChevronRight />}
         icon={<FaHeadphonesAlt className="text-secondary" />}

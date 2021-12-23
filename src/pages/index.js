@@ -1,13 +1,36 @@
-import React from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { Circle, Line } from "rc-progress";
 import Layout from "../components/base/Layout";
 import { FaCheck, FaCheckCircle, FaUserCircle } from "react-icons/fa";
 import Button from "../components/general/button/Button";
+import Box from "../components/data-display/box";
 import { useFirebaseContext } from "../context/FirebaseContext";
+import { collection, getDocs } from "firebase/firestore";
+import useFirebase from "../hooks/useFirebase";
+import { Link } from "gatsby";
+import { SurahContext } from "../context/SurahContext";
 
 const Index = () => {
   const { getUser } = useFirebaseContext();
   const user = getUser();
+
+  const [userData, setUserData] = useState();
+  const { db } = useFirebase();
+
+  const [mySurah] = useContext(SurahContext);
+
+  useEffect(() => {
+    console.log(db);
+    if (db) {
+      const getUserData = async () => {
+        const data = await getDocs(collection(db, "users"));
+        console.log(data);
+        setUserData(data.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
+      };
+      getUserData();
+    }
+  }, [db]);
+
   return (
     <Layout>
       <div className="h-full">
@@ -34,9 +57,6 @@ const Index = () => {
                 </div>
               </div>
               <div>
-                <p className="font-primary text-primary tracking-wider text-md mb-4 text-center">
-                  20%
-                </p>
                 <Button>lanjutkan</Button>
               </div>
 
@@ -166,20 +186,20 @@ const Index = () => {
               <p className="font-primary font-bold text-green-400"> 34</p>
             </div>
           </div>
-          <div className="col-span-2 bg-primary rounded-xl p-6 shadow-none">
-            <div className="flex items-center justify-between">
-              <p className="font-primary font-bold">Juga membaca surat</p>
-              <p className="font-primary text-secondary">Ali Imran - 42</p>
-              <Button>lanjutkan</Button>
-            </div>
-          </div>
-          <div className="col-span-2 bg-primary rounded-xl p-6 shadow-none">
-            <div className="flex items-center justify-between">
-              <p className="font-primary font-bold">Terkakhir didengar</p>
-              <p className="font-primary text-secondary">Ali Imran - 42</p>
-              <Button>lanjutkan</Button>
-            </div>
-          </div>
+          <Box
+            title="Juga membaca"
+            noData="Belum membaca surat"
+            lastChapter={mySurah.lastReadChapter}
+            lastSlug={mySurah.lastReadSlug}
+            lastVerse={mySurah.lastReadVerse}
+          />
+          <Box
+            title="Juga mendengar"
+            noData="Belum mendengarkan surat"
+            lastChapter={mySurah.lastListenChapter}
+            lastSlug={mySurah.lastListenSlug}
+            lastVerse={mySurah.lastListenVerse}
+          />
         </div>
       </div>
     </Layout>

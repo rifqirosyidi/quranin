@@ -1,5 +1,6 @@
 import { initializeApp } from "firebase/app";
 import { getAuth } from "firebase/auth";
+import { getFirestore } from "firebase/firestore";
 
 const config = {
   apiKey: process.env.GATSBY_FIREBASE_API_KEY,
@@ -13,6 +14,7 @@ const config = {
 
 let app;
 let auth;
+let db;
 
 export function getFirebase() {
   if (app) return app;
@@ -24,4 +26,10 @@ export function getFirebaseAuth() {
   if (auth) return auth;
   auth = getAuth(getFirebase());
   return auth;
+}
+
+export function getFirestoreDatabase() {
+  if (db) return db;
+  db = getFirestore(getFirebase());
+  return db;
 }

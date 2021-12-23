@@ -5,6 +5,8 @@ export const SurahContext = createContext();
 
 export const SurahProvider = ({ children }) => {
   const values = {
+    lastReadSlug: "",
+    lastListenSlug: "",
     lastReadChapter: "",
     lastReadVerse: "",
     lastListenChapter: "",

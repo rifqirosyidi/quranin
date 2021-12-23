@@ -2,12 +2,13 @@ import React from "react";
 import cls from "classnames";
 import { FaSearch } from "react-icons/fa";
 import Button from "../../general/button/Button";
-
-const Search = ({ searchRef }) => {
+import { animated } from "react-spring";
+const Search = ({ searchRef, style }) => {
   return (
-    <div
+    <animated.div
+      style={style}
       className={cls(
-        `fixed inset-0 bg-gray-500 bg-opacity-90 z-50 md:pt-24 pt-10`
+        `fixed top-0 bg-gray-500 bg-opacity-90 inset-0 z-50 md:pt-24 pt-10`
       )}
     >
       <div
@@ -62,7 +63,7 @@ const Search = ({ searchRef }) => {
               )}
             </div> */}
       </div>
-    </div>
+    </animated.div>
   );
 };
 

@@ -4,7 +4,7 @@ import Input from "../../data-entry/input";
 
 const ProfileSettings = () => {
   return (
-    <div className="flex-1 self-auto p-6 bg-primary rounded-xl">
+    <div className="p-6 bg-primary rounded-xl">
       <h2 className="text-2xl font-primary font-medium">Profile</h2>
       <p className="text-secondary font-primary text-sm mt-1">
         Pengaturan profil anda.

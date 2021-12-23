@@ -9,7 +9,7 @@ const Input = ({ field, bg = "primary", label, form, ...rest }) => {
       <input
         className={cls(
           bgMap[bg],
-          "font-primary w-full text-sm text-primary px-4 py-3 rounded-xl"
+          "font-primary w-full bg-primary text-sm text-primary px-4 py-3 rounded-xl"
         )}
         {...field}
         {...rest}

@@ -64,6 +64,7 @@ const Surat = ({ data, pageContext }) => {
     } else {
       await setMySurah({
         ...mySurah,
+        lastReadSlug: chapterSlug,
         lastReadChapter: chapterNameIndonesian,
         lastReadVerse: currentVerse,
       });
@@ -75,6 +76,7 @@ const Surat = ({ data, pageContext }) => {
   const handlePrev = async () => {
     await setMySurah({
       ...mySurah,
+      lastReadSlug: chapterSlug,
       lastReadChapter: chapterNameIndonesian,
       lastReadVerse: currentVerse,
     });

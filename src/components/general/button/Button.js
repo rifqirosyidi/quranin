@@ -15,7 +15,7 @@ const Button = ({
       type={type}
       className={cls(
         variantMap[variant],
-        `${className} font-primary font-medium px-3 py-2 rounded-md tracking-wider shadow hover:shadow-primary transition duration-1000 transform hover:-translate-y-1`
+        `${className} font-primary font-medium px-3 py-2 rounded-md tracking-wider hover:shadow-primary transition duration-1000 transform hover:-translate-y-1`
       )}
       {...rest}
     >

@@ -34,7 +34,7 @@ const TopNav = () => {
     setIsProfileDropdown((prev) => !prev);
   };
 
-  const transitions = useTransition(isProfileDropdown, {
+  const profileTransition = useTransition(isProfileDropdown, {
     initial: null,
     from: { opacity: 0, x: 230 },
     enter: { opacity: 1, x: 0 },
@@ -47,6 +47,19 @@ const TopNav = () => {
         setIsProfileDropdown((prev) => !prev);
       }
       setIsProfileDropdown(false);
+    },
+  });
+
+  const searchTransition = useTransition(isComponentVisible, {
+    initial: null,
+    from: { opacity: 0, y: "-100vh", rotateY: 20, skewY: 5 },
+    enter: { opacity: 1, y: "0", rotateY: 0, skewY: 0 },
+    leave: { opacity: 0, y: "100vh", rotateY: -20, skewY: 5 },
+    reverse: isComponentVisible,
+    delay: 200,
+    config: config.molasses,
+    onRest: () => {
+      setIsComponentVisible((prev) => !prev);
     },
   });
 
@@ -107,7 +120,7 @@ const TopNav = () => {
                   {user?.displayName}
                 </button>
 
-                {transitions(
+                {profileTransition(
                   (styles, item) =>
                     item && (
                       <animated.div
@@ -157,7 +170,10 @@ const TopNav = () => {
           </div>
         </div>
       </div>
-      {isComponentVisible && <Search searchRef={ref} />}
+
+      {searchTransition(
+        (styles, item) => item && <Search style={styles} searchRef={ref} />
+      )}
     </div>
   );
 };

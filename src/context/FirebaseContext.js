@@ -19,7 +19,7 @@ export function useFirebaseContext() {
 }
 
 export function FirebaseProvider({ children }) {
-  const [app, auth] = useFirebase();
+  const { app, auth } = useFirebase();
   const [currentUser, setCurrentUser] = useState();
 
   const signUp = async (name, email, password) => {

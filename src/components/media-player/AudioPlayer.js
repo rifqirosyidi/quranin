@@ -32,6 +32,7 @@ const AudioPlayer = ({
       if (isListening) {
         setMySurah({
           ...mySurah,
+          lastListenSlug: chapterSlug,
           lastListenChapter: chapterName,
           lastListenVerse: nextVerse - 1,
         });
@@ -41,6 +42,7 @@ const AudioPlayer = ({
       } else {
         setMySurah({
           ...mySurah,
+          lastListenSlug: chapterSlug,
           lastListenChapter: chapterName,
           lastListenVerse: nextVerse - 1,
         });
