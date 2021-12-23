@@ -124,22 +124,21 @@ export function FirebaseProvider({ children }) {
   }
 
   useEffect(() => {
-    if (!app) return;
-    onAuthStateChanged(auth, (currentUser) => {
-      setCurrentUser(currentUser);
-      if (currentUser) {
-        // store the user on local storage
-        if (typeof window !== "undefined") {
-          localStorage.setItem("user", true);
+    if (auth) {
+      onAuthStateChanged(auth, (currentUser) => {
+        setCurrentUser(currentUser);
+        if (currentUser) {
+          if (typeof window !== "undefined") {
+            localStorage.setItem("user", true);
+          }
+        } else {
+          if (typeof window !== "undefined") {
+            localStorage.removeItem("user");
+          }
         }
-      } else {
-        // removes the user from local storage on logOut
-        if (typeof window !== "undefined") {
-          localStorage.removeItem("user");
-        }
-      }
-    });
-  }, [app, auth]);
+      });
+    }
+  }, [auth]);
 
   const value = {
     currentUser,
