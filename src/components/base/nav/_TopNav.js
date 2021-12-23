@@ -21,6 +21,8 @@ const TopNav = () => {
     typeof window !== "undefined"
       ? JSON.parse(localStorage.getItem("user")) || false
       : null;
+
+  console.log(userLocal);
   const { getUser, signOut } = useFirebaseContext();
   const user = getUser();
 
@@ -43,10 +45,7 @@ const TopNav = () => {
     delay: 200,
     config: config.molasses,
     onRest: () => {
-      if (user) {
-        setIsProfileDropdown((prev) => !prev);
-      }
-      setIsProfileDropdown(false);
+      setIsProfileDropdown((prev) => !prev);
     },
   });
 
@@ -111,7 +110,7 @@ const TopNav = () => {
 
             <FaBell className="text-gray-500 text-lg" />
             <ThemeToggle />
-            {userLocal ? (
+            {user ? (
               <div className="relative">
                 <button
                   onClick={() => toggleProfileDropdown()}
