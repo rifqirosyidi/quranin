@@ -20,11 +20,9 @@ const Index = () => {
   const [mySurah] = useContext(SurahContext);
 
   useEffect(() => {
-    console.log(db);
     if (db) {
       const getUserData = async () => {
         const data = await getDocs(collection(db, "users"));
-        console.log(data);
         setUserData(data.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
       };
       getUserData();
