@@ -1,6 +1,5 @@
 import React from "react";
 import Button from "../../general/button/Button";
-import Input from "../../data-entry/input";
 import { FaExclamationTriangle } from "react-icons/fa";
 
 const TargetSettings = () => {

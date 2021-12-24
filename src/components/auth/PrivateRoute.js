@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { navigate } from "gatsby";
 import { useSafeLocalStorage } from "../../hooks/useSafeLocalStorage";
 

@@ -57,9 +57,9 @@ const TopNav = () => {
 
   const mobileProfileTransition = useTransition(isMobileDropdown, {
     initial: null,
-    from: { opacity: 0, x: 230 },
-    enter: { opacity: 1, x: 0 },
-    leave: { opacity: 0, x: 230 },
+    from: { opacity: 0, y: -230 },
+    enter: { opacity: 1, y: 0 },
+    leave: { opacity: 0, y: -230 },
     reverse: isMobileDropdown,
     delay: 200,
     config: config.molasses,
@@ -197,7 +197,9 @@ const TopNav = () => {
               <p className="font-primary font-medium">quranin</p>
             </div>
             <div className="flex items-center space-x-6">
-              <FaSearch className="text-secondary" />
+              <button onClick={() => setIsComponentVisible((prev) => !prev)}>
+                <FaSearch className="text-secondary" />
+              </button>
               <ThemeToggle />
               <button onClick={toggleMobileDropdown}>
                 <FaBars className="text-secondary" />

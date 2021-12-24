@@ -7,7 +7,6 @@ import Box from "../components/data-display/box";
 import { useFirebaseContext } from "../context/FirebaseContext";
 import { collection, getDocs } from "firebase/firestore";
 import useFirebase from "../hooks/useFirebase";
-import { Link } from "gatsby";
 import { SurahContext } from "../context/SurahContext";
 
 const Index = () => {

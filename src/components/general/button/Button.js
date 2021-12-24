@@ -7,15 +7,22 @@ const Button = ({
   type,
   variant = "primary",
   disabled,
+  withHoverEffect = true,
+  onClick,
   className,
   rest,
 }) => {
   return (
     <button
       type={type}
+      onClick={onClick}
+      disabled={disabled}
       className={cls(
         variantMap[variant],
-        `${className} font-primary font-medium px-3 py-2 rounded-md tracking-wider hover:shadow-primary transition duration-1000 transform hover:-translate-y-1`
+        `${className} ${
+          withHoverEffect &&
+          "hover:shadow-primary transition duration-1000 transform hover:-translate-y-1"
+        } font-primary font-medium px-3 py-2 rounded-md tracking-wider `
       )}
       {...rest}
     >

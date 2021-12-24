@@ -11,7 +11,11 @@ const Profile = () => {
     <Layout>
       <div className="mt-10">
         <div className="flex flex-col items-center justify-center">
-          <img className="rounded-full" src="https://picsum.photos/200/200" />
+          <img
+            className="rounded-full"
+            src="https://picsum.photos/200/200"
+            alt="user profile"
+          />
 
           <div className="bg-primary rounded-xl p-6 text-center mt-10">
             <p className="font-primary text-xl  font-medium">
@@ -44,11 +48,11 @@ const Profile = () => {
       <p className="font-primary text-xl font-medium text-center mt-20 mb-4">
         Pencapaian
       </p>
-      <p className="font-primary font-light text-secondary w-1/2 mx-auto text-center mb-10">
+      <p className="font-primary font-light text-secondary md:w-1/2 mx-auto text-center mb-10">
         Berikut beberapa achievement & pencapaian yg telah anda peroleh.
         Meskipun semua pencapaian selesai Tetaplah semangat membaca Al Quran!.
       </p>
-      <div className="grid grid-cols-6 gap-x-6 gap-y-10 place-items-center pb-10">
+      <div className="grid grid-cols-2 md:grid-cols-6 gap-x-6 gap-y-10 place-items-center pb-10">
         <div className="relative">
           <Trophy className="opacity-20 w-24" />
           <p className="absolute left-0 right-0 -bottom-5 text-sm rounded-md bg-primary p-2 text-center font-primary text-secondary">

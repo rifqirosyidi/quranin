@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { Router } from "@reach/router";
 import Login from "../../components/auth/login";
 import Register from "../../components/auth/register";
