@@ -2,6 +2,7 @@ import React, { useContext, useState } from "react";
 import cls from "classnames";
 import { Link } from "gatsby";
 import {
+  FaBars,
   FaBell,
   FaCog,
   FaHeadphonesAlt,
@@ -31,9 +32,14 @@ const TopNav = () => {
     useComponentVisible(false);
 
   const [isProfileDropdown, setIsProfileDropdown] = useState(false);
+  const [isMobileDropdown, setIsMobileDropdown] = useState(false);
 
   const toggleProfileDropdown = () => {
     setIsProfileDropdown((prev) => !prev);
+  };
+
+  const toggleMobileDropdown = () => {
+    setIsMobileDropdown((prev) => !prev);
   };
 
   const profileTransition = useTransition(isProfileDropdown, {
@@ -46,6 +52,19 @@ const TopNav = () => {
     config: config.molasses,
     onRest: () => {
       setIsProfileDropdown((prev) => !prev);
+    },
+  });
+
+  const mobileProfileTransition = useTransition(isMobileDropdown, {
+    initial: null,
+    from: { opacity: 0, x: 230 },
+    enter: { opacity: 1, x: 0 },
+    leave: { opacity: 0, x: 230 },
+    reverse: isMobileDropdown,
+    delay: 200,
+    config: config.molasses,
+    onRest: () => {
+      setIsMobileDropdown((prev) => !prev);
     },
   });
 
@@ -64,7 +83,7 @@ const TopNav = () => {
 
   return (
     <div>
-      <div className="fixed left-0 top-0 right-0 h-16 shadow-none flex items-center bg-primary text-primary z-50">
+      <div className="hidden md:flex fixed left-0 top-0 right-0 h-16 shadow-none items-center bg-primary text-primary z-50">
         <div className="flex container mx-auto items-center justify-between w-full ">
           <div className="flex space-x-4 mr-8 items-center">
             <p className="font-primary text-gray-700 font-bold text-xl w-9 h-9 bg-emerald-300 rounded-xl mr-8"></p>
@@ -166,6 +185,83 @@ const TopNav = () => {
                 </Link>
               </>
             )}
+          </div>
+        </div>
+      </div>
+
+      {/* mobile navigation */}
+      <div className="fixed md:hidden h-16 bg-primary w-full z-50 shadow-sm">
+        <div className="relative ">
+          <div className="flex items-center justify-between px-8 h-16 w-full">
+            <div>
+              <p className="font-primary font-medium">quranin</p>
+            </div>
+            <div className="flex items-center space-x-6">
+              <FaSearch className="text-secondary" />
+              <ThemeToggle />
+              <button onClick={toggleMobileDropdown}>
+                <FaBars className="text-secondary" />
+              </button>
+            </div>
+          </div>
+
+          <div className="absolute top-0 rounded-bl-xl right-0 mt-16 z-50">
+            <div className="flex flex-col space-y-4 w-56">
+              {user ? (
+                <>
+                  {mobileProfileTransition(
+                    (styles, item) =>
+                      item && (
+                        <animated.div
+                          style={styles}
+                          className="bg-primary p-4 flex flex-col space-y-4 text-secondary rounded-bl-xl"
+                        >
+                          <Link to="/authenticate/profile">
+                            <div className="font-primary">Profile</div>
+                          </Link>
+                          <Link to="/authenticate/settings">
+                            <div className="flex space-x-2 items-center font-primary">
+                              <FaCog /> <p>Settings</p>
+                            </div>
+                          </Link>
+                          <button
+                            onClick={signOut}
+                            className="flex space-x-2 items-center font-primary"
+                          >
+                            <FaSignOutAlt />
+                            <p>Logout</p>
+                          </button>
+                        </animated.div>
+                      )
+                  )}
+                </>
+              ) : (
+                <>
+                  {mobileProfileTransition(
+                    (styles, item) =>
+                      item && (
+                        <animated.div
+                          style={styles}
+                          className="bg-primary p-4 flex flex-col space-y-4 text-secondary rounded-bl-xl"
+                        >
+                          <Link
+                            to="/authenticate/login"
+                            className="font-primary"
+                          >
+                            Login
+                          </Link>
+                          <Link
+                            to="/authenticate/register"
+                            className="font-primary"
+                          >
+                            Register
+                          </Link>
+                        </animated.div>
+                      )
+                  )}
+                </>
+              )}
+            </div>
           </div>
         </div>
       </div>

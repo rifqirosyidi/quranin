@@ -31,21 +31,21 @@ const Index = () => {
 
   return (
     <Layout>
-      <div className="h-full">
-        <div className="grid grid-cols-4 gap-5">
-          <div className="col-span-3 rounded-xl bg-primary shadow-none">
-            <div className="flex items-end justify-between p-8">
+      <div>
+        <div className="grid md:grid-cols-4 gap-5">
+          <div className="md:col-span-3 rounded-xl bg-primary shadow-none">
+            <div className="md:flex items-end justify-between p-4 md:p-8">
               <div>
-                <p className="text-primary font-primary font-bold mb-10">
+                <p className="text-primary font-primary font-bold mb-5 md:mb-10">
                   Khatamul Qur'an
                 </p>
 
-                <div className="text-3xl font-bold">
+                <div className="md:text-3xl font-bold">
                   <span className="bg-clip-text text-transparent bg-emerald-400">
                     Surah: Al Baqarah
                   </span>
                 </div>
-                <div className="flex items-center justify-between mt-2">
+                <div className="flex items-center justify-between my-2">
                   <p className="font-secondary text-secondary text-md">
                     Sapi Betina
                   </p>
@@ -54,13 +54,16 @@ const Index = () => {
                   </p>
                 </div>
               </div>
-              <div>
-                <Button>lanjutkan</Button>
-              </div>
 
-              <p className="font-arabic text-primary text-8xl text-shadow">
-                البقرة
-              </p>
+              <div className="flex items-center md:items-end md:space-x-10 justify-between mt-2">
+                <div className="text-right">
+                  <Button>lanjutkan</Button>
+                </div>
+
+                <p className="font-arabic text-primary text-4xl md:text-8xl text-shadow">
+                  البقرة
+                </p>
+              </div>
             </div>
             <div className="mx-6 mb-6">
               <Line
@@ -73,7 +76,7 @@ const Index = () => {
               />
             </div>
           </div>
-          <div className="bg-primary rounded-xl p-8 shadow-none flex flex-col justify-between">
+          <div className="order-first md:order-none bg-primary rounded-xl p-4 md:p-8 shadow-none flex flex-col justify-between">
             <div className="flex items-center justify-between mb-4">
               <p className="font-primary text-sm">
                 Salam,{" "}
@@ -84,7 +87,7 @@ const Index = () => {
               <FaUserCircle className="text-5xl text-secondary" />
             </div>
             <div>
-              <div className="flex justify-between items-center  mb-4">
+              <div className="flex justify-between items-center mb-4">
                 <div className="flex items-center">
                   <p className="font-primary text-sm mr-4">target harian</p>
                   <FaCheck className="text-sm text-green-400" />
@@ -104,7 +107,7 @@ const Index = () => {
             </div>
           </div>
         </div>
-        <div className="mt-6 grid grid-cols-4 gap-6">
+        <div className="mt-6 grid md:grid-cols-4 gap-6">
           <div className="col-span-2 bg-primary rounded-xl p-6 shadow-none">
             <div className="flex items-center justify-between">
               <p className="font-primary font-bold">Minggu ini</p>
@@ -144,14 +147,14 @@ const Index = () => {
             </div>
           </div>
           <div className="bg-primary rounded-xl p-6 shadow-none">
-            <div className="flex">
+            <div className="flex flex-col md:flex-row">
               <div className="flex flex-col items-center justify-between">
                 <p className="font-primary font-bold">Progress</p>
                 <p className="font-primary text-secondary text-sm">
                   khatamul quran
                 </p>
               </div>
-              <div className="relative w-full ml-20">
+              <div className="relative w-full mt-10 md:ml-20">
                 <Circle
                   className="rounded-full shadow-none"
                   percent="3"
@@ -167,7 +170,7 @@ const Index = () => {
               </div>
             </div>
           </div>
-          <div className="grid grid-flow-row  gap-6">
+          <div className="grid grid-flow-row gap-6">
             <div className="p-6 bg-primary rounded-xl shadow-none">
               <p className="font-primary font-bold">Estimasi khatam</p>
               <div className="flex items-center justify-between">

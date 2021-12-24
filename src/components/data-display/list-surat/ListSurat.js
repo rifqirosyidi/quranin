@@ -9,9 +9,11 @@ const ListSurat = ({ listSurat }) => {
 
   return (
     <div
-      className={cls("grid gap-x-5 gap-y-6", {
-        "grid-cols-6": mySurah.viewPreference === "grid",
-        "grid-cols-4": mySurah.viewPreference === "list",
+      className={cls("grid gap-4 md:gap-x-5 md:gap-y-6", {
+        "grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6":
+          mySurah.viewPreference === "grid",
+        "grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-4":
+          mySurah.viewPreference === "list",
       })}
     >
       {mySurah.viewPreference === "grid" &&

@@ -8,10 +8,12 @@ const Box = ({ title, noData, lastChapter, lastVerse, lastSlug }) => {
       <div className="flex items-center justify-between">
         {lastChapter && lastVerse ? (
           <>
-            <p className="font-primary font-bold">{title}</p>
-            <p className="font-primary text-secondary">
-              {lastChapter} - {lastVerse}
-            </p>
+            <div className="flex flex-col">
+              <p className="font-primary font-bold">{title}</p>
+              <p className="font-primary text-secondary">
+                {lastChapter} - {lastVerse}
+              </p>
+            </div>
             <Link to={`/surat/${lastSlug}/ayat/${lastVerse}`}>
               <Button>lanjutkan</Button>
             </Link>

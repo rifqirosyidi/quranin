@@ -38,7 +38,7 @@ const ViewAndSort = ({ listSurat, setListSurat }) => {
   };
 
   return (
-    <div className="flex space-x-8 justify-between pb-8">
+    <div className="flex items-center justify-between mb-4">
       <div className="flex space-x-4">
         <button
           onClick={() =>
@@ -48,11 +48,13 @@ const ViewAndSort = ({ listSurat, setListSurat }) => {
             })
           }
           className={cls(
-            "px-6 py-4 flex flex-col items-start justify-between rounded-xl",
+            "p-4 md:px-6 md:py-4 flex flex-col items-start justify-between rounded-xl",
             { "bg-primary shadow-none": mySurah.viewPreference === "grid" }
           )}
         >
-          <p className="font-secondary text-sm text-secondary">Tampilan</p>
+          <p className="hidden md:block font-secondary text-sm text-secondary">
+            Tampilan
+          </p>
           <FaGripHorizontal className="text-primary text-xl" />
         </button>
         <button
@@ -63,23 +65,25 @@ const ViewAndSort = ({ listSurat, setListSurat }) => {
             })
           }
           className={cls(
-            "px-6 py-4 flex flex-col items-start justify-between rounded-xl",
+            "p-4 md:px-6 md:py-4 flex flex-col items-start justify-between rounded-xl",
             { "bg-primary shadow-none": mySurah.viewPreference === "list" }
           )}
         >
-          <p className="font-secondary text-sm text-secondary">Tampilan</p>
+          <p className="hidden md:block font-secondary text-sm text-secondary">
+            Tampilan
+          </p>
           <FaGripLines className="text-primary text-xl" />
         </button>
       </div>
-      <div className="flex space-x-5">
+      <div className="flex space-x-4">
         <button
           onClick={toggleSortSeries}
-          className={cls("px-6 py-4 rounded-xl w-40", {
+          className={cls("p-4 w-32 md:px-6 md:py-4 rounded-xl md:w-40", {
             "bg-primary shadow-none": currentSort === "seri",
           })}
         >
           <div>
-            <p className="font-secondary text-secondary text-sm text-left">
+            <p className="hidden md:block font-secondary text-secondary text-sm text-left">
               Urutkan
             </p>
           </div>

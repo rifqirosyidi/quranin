@@ -9,7 +9,7 @@ import TargetSettings from "./_TargetSettings";
 const Settings = () => {
   return (
     <Layout>
-      <div className="grid grid-cols-3 gap-6">
+      <div className="grid md:grid-cols-3 gap-6">
         <div className="flex flex-col space-y-6">
           <ProfileSettings />
           <SuaraSettings />

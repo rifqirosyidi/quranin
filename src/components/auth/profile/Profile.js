@@ -23,7 +23,7 @@ const Profile = () => {
           </div>
         </div>
       </div>
-      <div className="grid grid-cols-4 mt-10 place-items-center">
+      <div className="grid grid-cols-2 md:grid-cols-4 mt-10 gap-6 place-items-center">
         <div>
           <p className="font-primary text-secondary">ayat dibaca</p>
           <p className="font-primary text-5xl">120</p>

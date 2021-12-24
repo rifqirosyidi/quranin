@@ -9,7 +9,7 @@ const Index = () => {
         <p className="font-primary text-center font-medium text-secondary mb-10">
           list ayat favorit anda
         </p>
-        <div className="grid grid-cols-5 gap-6">
+        <div className="grid md:grid-cols-3 lg:grid-cols-5 gap-6">
           <CardFavorite />
           <CardFavorite />
           <CardFavorite />

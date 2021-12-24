@@ -8,7 +8,7 @@ import Button from "../../general/button/Button";
 const RightNav = () => {
   const [mySurah] = useContext(SurahContext);
   return (
-    <div className="fixed top-24 right-0 w-60 mr-4 min-h-screen space-y-5">
+    <div className="hidden md:block md:fixed top-24 right-0 w-60 mr-4 min-h-screen space-y-5">
       <div className="p-4 bg-primary rounded-xl shadow-none">
         <h2 className="font-primary font-bold tracking-wide font-lg mb-2">
           Khatamul Quran
